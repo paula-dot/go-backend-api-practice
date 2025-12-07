@@ -28,8 +28,11 @@ func (h *Handler) handleRegister(w http.ResponseWriter, r *http.Request) {
 	// Get JSON payload
 	var payload Types.RegisterUserPayload
 	if err := utils.ParseJSON(r.Body, &payload); err != nil {
+		utils.WriteError(w.(http.ResponseWriter), http.StatusBadRequest, err)
 	}
+
 	// Check if the user exists
+
 	// If exists, return error
 	// If not, create user
 }
