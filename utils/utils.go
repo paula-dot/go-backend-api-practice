@@ -1,0 +1,19 @@
+package utils
+
+import (
+	"encoding/json"
+	"fmt"
+	"io"
+	"net/http"
+)
+
+func ParseJSON(r io.ReadCloser, payload any) error {
+	if r.Body == nil {
+		return fmt.Errorf("missing request body")
+	}
+	return json.NewDecoder(r.Body).Decode(&payload)
+}
+
+func WriteJSON(w http.ResponseWriter, status int, v any) error {
+	w.Header().Add("Content-Type", "application/json")
+}
